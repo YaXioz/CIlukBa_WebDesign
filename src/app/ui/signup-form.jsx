@@ -2,6 +2,7 @@
 
 import { useFormState, useFormStatus } from "react-dom";
 import { signup } from "../../actions/auth";
+import Link from "next/link";
 
 export default function SignupForm() {
   const [state, action] = useFormState(signup, undefined);
@@ -55,6 +56,9 @@ export default function SignupForm() {
                 {state?.errors?.name && <p>{state.errors.name}</p>}
                 <SubmitButton />
               </form>
+              <div className="mt-5">
+                <Link className="text-white" href="signin">Already have an account?</Link>
+              </div>
             </div>
           </div>
         </div>
