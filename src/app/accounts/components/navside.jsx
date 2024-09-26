@@ -4,10 +4,10 @@ import { RiMenu3Line, RiMenuLine, RiSearchLine } from "@remixicon/react";
 
 export default function Navside() {
   return (
-    <div>
+    <div className="sticky top-12 flex flex-col  ">
       {/* light mode - tight side navigation with red notification */}
-      <div class="py-4 px-2 text-gray-900 bg-white rounded text-center shadow-lg ">
-        <img src="/image/Logo Black.png" alt="alt placeholder" class="w-8 h-8 mx-auto mb-5" />
+      <div class="py-6 px-4 text-gray-900 bg-white rounded-lg text-center shadow-lg ">
+        <img src="/image/logo-black.png" alt="alt placeholder" class="w-8 h-8 mx-auto mb-5" />
         <span class="cursor-pointer h   over:text-gray-500 px-2 block mb-5">
           <RiMenuLine size={32} color="black" />
         </span>

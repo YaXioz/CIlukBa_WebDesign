@@ -6,13 +6,19 @@ import Navside from "./components/navside";
 
 export default function Page() {
   return (
-    <div className="container">
-      <div className="p-4 pt-0 mx-auto flex flex-wrap">
-        <Navside></Navside>
+    <div className="w-full flex">
+      <div className=" mt-16 container flex justify-between gap-8 flex-row mx-auto px-12">
+        <aside className="max-w-max">
+          <Navside></Navside>
+        </aside>
+        <div className="container bg-white rounded-lg flex justify-center h-screen">
+          <form action={logout}>
+            <button className="rounded-lg bg-black p-4 mt-3" type="submit">
+              Logout
+            </button>
+          </form>
+        </div>
       </div>
-      <form action={logout}>
-        <button type="submit">Logout</button>
-      </form>
     </div>
   );
 }
