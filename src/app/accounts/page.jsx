@@ -1,14 +1,18 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 
-import Image from "next/image";
 import { logout } from "../../actions/auth";
+import Navside from "./components/navside";
 
 export default function Page() {
   return (
     <div className="container">
-      <form action={() => logout()}></form>
-      <button type="submit">Logout</button>
+      <div className="p-4 pt-0 mx-auto flex flex-wrap">
+        <Navside></Navside>
+      </div>
+      <form action={logout}>
+        <button type="submit">Logout</button>
+      </form>
     </div>
   );
 }
