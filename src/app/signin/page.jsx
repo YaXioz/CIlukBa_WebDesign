@@ -3,7 +3,7 @@ import SigninForm from "../ui/signin-form";
 
 export default function Page() {
   return (
-    <div className="container">
+    <div className="w-full">
       <SigninForm></SigninForm>
     </div>
   );

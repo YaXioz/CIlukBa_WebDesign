@@ -2,6 +2,7 @@
 
 import { useFormState, useFormStatus } from "react-dom";
 import { login } from "../../actions/auth";
+import Link from "next/link";
 
 export default function SigninForm() {
   const [state, action] = useFormState(login, undefined);
@@ -22,12 +23,13 @@ export default function SigninForm() {
 
       <div className="grid mb-6">
         <label htmlFor="password">Password</label>
-        <input className="bg-gray-200 text-black p-2 rounded-lg" id="password" name="password" type="password" placeholder="enter your password" />
+        <input className="bg-gray-200 text-black p-2 rounded-lg" id="password" name="password" type="password" placeholder="Enter your password" />
       </div>
       {state?.errors?.password && <p>{state.errors.password}</p>}
 
       <SubmitButton />
     </form>
+    <Link  href="signup">Create account</Link>
     </div>
     </div>
     </div>
@@ -42,7 +44,7 @@ function SubmitButton() {
   return (
     <div className="flex justify-center">
       <button className="bg-gray-800 text-white p-2 rounded-lg" disabled={pending} type="submit">
-        Sign Up
+        Sign In
       </button>
     </div>
   );
