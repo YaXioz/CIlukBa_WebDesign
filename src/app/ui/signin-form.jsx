@@ -8,14 +8,14 @@ export default function SigninForm() {
   const [state, action] = useFormState(login, undefined);
 
   return (
-    <div className="relative py-16 bg-gradient-to-br from-sky-50 to-gray-200 min-h-screen">
+    <div className="relative py-16 bg-[#212121] min-h-screen">
       <div className="relative container m-auto px-6 md:text-black text-gray-500 md:px-12 xl:px-40">
         <div class="flex justify-center mb-4">
           {" "}
-          <img src="/image/Logo Black.png" alt="Logo" class="h-12" />{" "}
+          <img src="/image/logo-white.png" alt="Logo" class="h-12" />{" "}
         </div>
         <div className="m-auto md:w-8/12 lg:w-6/12 xl:w-6/12">
-          <div className="rounded-xl bg-[#1a1a1a] shadow-xl">
+          <div className="rounded-xl bg-[#1a1a1a] shadow-lg shadow-white">
             <div className="p-6 sm:p-16">
               <form action={action}>
                 <div className="grid mb-6">
