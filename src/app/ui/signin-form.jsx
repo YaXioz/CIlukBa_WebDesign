@@ -2,11 +2,11 @@
 "use client";
 
 import { useFormState, useFormStatus } from "react-dom";
-import { login } from "../../actions/auth";
+import { signin } from "../../actions/auth";
 import Link from "next/link";
 
 export default function SigninForm() {
-  const [state, action] = useFormState(login, undefined);
+  const [state, action] = useFormState(signin, undefined);
 
   return (
     <div className="relative py-16 bg-[#212121] min-h-screen">
@@ -42,7 +42,7 @@ export default function SigninForm() {
                 </div>
               </form>
               <div className="mt-5">
-                <Link className="text-white" href="signup">
+                <Link className="text-white" href="/signup">
                   Don&apos;t have an account?
                 </Link>
               </div>

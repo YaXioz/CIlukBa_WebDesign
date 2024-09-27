@@ -1,5 +1,5 @@
 "use server";
-import { LoginFormSchema, SignupFormSchema } from "../lib/definitions";
+import { SigninFormSchema, SignupFormSchema } from "../lib/definitions";
 import argon from "argon2";
 import createSupabaseClient from "../supabase/client";
 import { redirect } from "next/navigation";
@@ -59,11 +59,11 @@ export async function signup(state, formData) {
   }
 
   // 4. Redirect user
-  redirect("/login");
+  redirect("/signin");
 }
 
-export async function login(state, formData) {
-  const validatedFields = LoginFormSchema.safeParse({
+export async function signin(state, formData) {
+  const validatedFields = SigninFormSchema.safeParse({
     email: formData.get("email"),
     password: formData.get("password"),
   });

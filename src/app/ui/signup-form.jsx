@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import { useFormState, useFormStatus } from "react-dom";
@@ -60,7 +61,7 @@ export default function SignupForm() {
                 <SubmitButton />
               </form>
               <div className="mt-5">
-                <Link className="text-white" href="signin">
+                <Link className="text-white" href="/signin">
                   Already have an account?
                 </Link>
               </div>

@@ -38,7 +38,7 @@ export async function register({ username, email, password, name }) {
   return { status, data, error };
 }
 
-export async function login({ username, password }) {
+export async function signin({ username, password }) {
   let errors = {};
 
   if (!username) {
