@@ -14,8 +14,27 @@ export const SignupFormSchema = z.object({
     .trim(),
   name: z.string().trim(),
 });
+
 export const SigninFormSchema = z.object({
   //   username: z.string().min(2, { message: "Username must be at least 2 characters long." }).trim(),
   email: z.string().email({ message: "Please enter a valid email." }).trim(),
   password: z.string().trim(),
+});
+
+const MAX_FILE_SIZE = 5000000;
+const ACCEPTED_IMAGE_TYPES = ["image/jpeg", "image/jpg", "image/png", "image/heic"];
+export const TimelineCreateFormSchema = z.object({
+  year: z.string().trim(),
+  image_1: z
+    .any()
+    .refine((file) => file?.size <= MAX_FILE_SIZE, `Max image size is 5MB.`)
+    .refine((file) => ACCEPTED_IMAGE_TYPES.includes(file?.type), "Only .jpg, .jpeg, .png and .heic formats are supported."),
+  image_2: z
+    .any()
+    .refine((file) => file?.size <= MAX_FILE_SIZE, `Max image size is 5MB.`)
+    .refine((file) => ACCEPTED_IMAGE_TYPES.includes(file?.type), "Only .jpg, .jpeg, .png and .heic formats are supported."),
+  image_3: z
+    .any()
+    .refine((file) => file?.size <= MAX_FILE_SIZE, `Max image size is 5MB.`)
+    .refine((file) => ACCEPTED_IMAGE_TYPES.includes(file?.type), "Only .jpg, .jpeg, .png and .heic formats are supported."),
 });

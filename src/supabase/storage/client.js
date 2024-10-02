@@ -28,7 +28,7 @@ export async function uploadImage({ file, bucket, folder }) {
 
   const imageUrl = `https://${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/${bucket}/${data?.path}`;
 
-  return { imageUrl, errror: error };
+  return { imageUrl, error: error, path };
 }
 
 export const deleteImage = async (imageUrl) => {
