@@ -86,6 +86,6 @@ function SubmitButton() {
           Create Account!
         </button>
       </div>
-    </div>
+    </div>  
   );
 }
