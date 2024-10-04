@@ -1,13 +1,16 @@
 /* eslint-disable @next/next/no-img-element */
-"use client";
 
 import Image from "next/image";
 import { logout } from "../../../actions/auth";
 import Navside from "../../components/navside";
 import Add from "@/app/components/add";
 import Link from "next/link";
+import { getTimeline } from "@/actions/timeline";
 
-export default function Page() {
+export default async function Page({ year }) {
+  const timeline = await getTimeline(year);
+  console.log(timeline);
+
   return (
     <div className="w-full flex bg-[#171D22]">
       <div className=" mt-16 container flex justify-between gap-8 flex-row mx-auto px-12">

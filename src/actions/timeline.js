@@ -5,6 +5,30 @@ import { redirect } from "next/navigation";
 import { uploadImage } from "../supabase/storage/client";
 import { isEmpty } from "@/lib/utils";
 
+export async function getTimelines() {
+  const supabase = createSupabaseClient().from("Timelines");
+  const user_id = await getId();
+  console.log(user_id);
+
+  const { data, error } = await supabase.select().eq("user_id", user_id);
+
+  console.log(data);
+
+  return data;
+}
+export async function getTimeline(year) {
+  const supabase = createSupabaseClient().from("Timelines");
+  const user_id = await getId();
+
+  const { data, error } = await supabase.select().eq("user_id", user_id);
+  // console.log(year);
+
+  const timeline = data.filter((timeline, i) => {
+    if (timeline["year"] == year) return timeline;
+  });
+  return timeline[0];
+}
+
 export async function create(state, formData) {
   const supabase = createSupabaseClient().from("Timelines");
   const user_id = await getId();
@@ -91,8 +115,6 @@ export async function create(state, formData) {
 
   if (!user) {
     console.log("error");
-    console.log(error);
-    return;
     return {
       message: "An error occurred while creating your timeline.",
     };
