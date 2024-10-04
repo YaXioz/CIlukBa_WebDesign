@@ -9,6 +9,7 @@ import { getTimeline } from "@/actions/timeline";
 import { getPosts } from "@/actions/post";
 import { isEmpty } from "@/lib/utils";
 import { RiAddLine } from "@remixicon/react";
+import Setting from "@/app/components/setting";
 
 export default async function Page({ params }) {
   const timeline = await getTimeline(params.year);
@@ -48,7 +49,7 @@ export default async function Page({ params }) {
           </div>
         </div>
         <aside className="max-w-max">
-          <Add />
+          <Setting />
         </aside>
       </div>
     </div>
