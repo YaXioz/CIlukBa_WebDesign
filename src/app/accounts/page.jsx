@@ -6,9 +6,11 @@ import Setting from "../components/setting";
 import Link from "next/link";
 import { RiAddLine, RiDeleteBin7Line, RiEyeLine, RiSettings2Line } from "@remixicon/react";
 import { getTimelines } from "@/actions/timeline";
+import { getUser } from "@/actions/profile";
 
 export default async function Page() {
   const timelines = (await getTimelines()) ?? [];
+  const profile = await getUser();
 
   return (
     <div className="w-full flex bg-[#171D22]">
@@ -20,9 +22,9 @@ export default async function Page() {
           <div>
             <Image src="/image/profile-picture.png" alt="" width={100} height={90} className="rounded-full mb-6 bg-[#666666]" />
           </div>
-          <div className="mb-2 text-center font-semibold text-2xl text-[#f5f5f5]">Ciluk Ba</div>
-          <div className="text-center w-1/2 font-sm  text-[#d5d5d5]">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea eum facilis maiores animi harum quae blanditiis ut cum id ad sint nisi deleniti illo, necessitatibus reprehenderit! Veniam et doloremque commodi.
+          <div className="mb-6">
+            <div className="mb-2 text-center font-semibold text-2xl text-[#f5f5f5]">{profile?.name}</div>
+            <div className="text-center w-1/2 font-sm  text-[#d5d5d5]">{profile?.bio ?? ""}</div>
           </div>
           <div className="w-2/3 h-[50vh] flex flex-col gap-4 border-t border-[#d9d9d9] p-4 overflow-auto justify-start">
             {timelines.map((timeline, i) => (
