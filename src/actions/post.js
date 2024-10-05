@@ -7,7 +7,7 @@ import { getTimeline } from "./timeline";
 import { v4 as uuidV4 } from "uuid";
 
 export async function getPosts(timeline_id) {
-  const supabase = createSupabaseClient().from("Story");
+  const supabase = createSupabaseClient().from("Posts");
 
   const { data, error } = await supabase.select().eq("timeline_id", timeline_id);
 
@@ -25,7 +25,7 @@ export async function getPost(url) {
 }
 
 export async function create(state, formData) {
-  const supabase = createSupabaseClient().from("Story");
+  const supabase = createSupabaseClient().from("Posts");
   //   const formData = new FormData();
   //   formData.set("userpic", myFileInput.files[0], "chris.jpg");
 

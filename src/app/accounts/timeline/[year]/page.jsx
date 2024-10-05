@@ -8,7 +8,7 @@ import Link from "next/link";
 import { getTimeline } from "@/actions/timeline";
 import { getPosts } from "@/actions/post";
 import { isEmpty } from "@/lib/utils";
-import { RiAddLine } from "@remixicon/react";
+import { RiAddLine, RiPencilLine } from "@remixicon/react";
 import Setting from "@/app/components/setting";
 
 export default async function Page({ params }) {
@@ -49,7 +49,15 @@ export default async function Page({ params }) {
           </div>
         </div>
         <aside className="max-w-max">
-          <Setting />
+          <div className="sticky top-16">
+            <div className="py-4 px-4  bg-[#f5f5f5] rounded-3xl text-center shadow-lg flex flex-col items-center">
+              <Link href={`/accounts/timeline/edit/${params.year}`}>
+                <span className="cursor-pointer text-gray-500 hover:text-[#333333] block ">
+                  <RiPencilLine size={40} />
+                </span>
+              </Link>
+            </div>
+          </div>
         </aside>
       </div>
     </div>

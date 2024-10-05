@@ -24,7 +24,7 @@ export default async function Page() {
           <div className="text-center w-1/2 font-sm  text-[#d5d5d5]">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea eum facilis maiores animi harum quae blanditiis ut cum id ad sint nisi deleniti illo, necessitatibus reprehenderit! Veniam et doloremque commodi.
           </div>
-          <div className="w-2/3 h-[50vh] grid grid-cols-1 gap-3 border-t border-[#d9d9d9] p-4 overflow-auto">
+          <div className="w-2/3 h-[50vh] flex flex-col gap-4 border-t border-[#d9d9d9] p-4 overflow-auto justify-start">
             {timelines.map((timeline, i) => (
               <div className="bg-white max-h-fit text-[#171d22] py-4 px-6 rounded-xl flex flex-row justify-between items-center" key={i}>
                 <div className="text-3xl font-bold">{timeline["year"]} | 12 Post</div>

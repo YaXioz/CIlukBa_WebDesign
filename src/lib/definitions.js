@@ -39,6 +39,37 @@ export const TimelineCreateFormSchema = z.object({
     .refine((file) => ACCEPTED_IMAGE_TYPES.includes(file?.type), "Only .jpg, .jpeg, .png and .heic formats are supported."),
 });
 
+export const TimelineUpdateFormSchema = z.object({
+  year: z.string().trim(),
+  image_1: z
+    .any()
+    .refine((file) => file?.size <= 0)
+    .or(
+      z
+        .any()
+        .refine((file) => file?.size <= MAX_FILE_SIZE, `Max image size is 5MB.`)
+        .refine((file) => ACCEPTED_IMAGE_TYPES.includes(file?.type), "Only .jpg, .jpeg, .png and .heic formats are supported.")
+    ),
+  image_2: z
+    .any()
+    .refine((file) => file?.size <= 0)
+    .or(
+      z
+        .any()
+        .refine((file) => file?.size <= MAX_FILE_SIZE, `Max image size is 5MB.`)
+        .refine((file) => ACCEPTED_IMAGE_TYPES.includes(file?.type), "Only .jpg, .jpeg, .png and .heic formats are supported.")
+    ),
+  image_3: z
+    .any()
+    .refine((file) => file?.size <= 0)
+    .or(
+      z
+        .any()
+        .refine((file) => file?.size <= MAX_FILE_SIZE, `Max image size is 5MB.`)
+        .refine((file) => ACCEPTED_IMAGE_TYPES.includes(file?.type), "Only .jpg, .jpeg, .png and .heic formats are supported.")
+    ),
+});
+
 export const PostCreateFormSchema = z.object({
   year: z.number().gte(1900, { message: "Year must be above 1899" }).lte(2025, { message: "Year must be below 2026" }),
   image: z

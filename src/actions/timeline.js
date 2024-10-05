@@ -1,4 +1,4 @@
-import { TimelineCreateFormSchema } from "@/lib/definitions";
+import { TimelineCreateFormSchema, TimelineUpdateFormSchema } from "@/lib/definitions";
 import createSupabaseClient from "../supabase/client";
 import { getId } from "./profile";
 import { redirect } from "next/navigation";
@@ -21,7 +21,7 @@ export async function getTimeline(year) {
   const user_id = await getId();
 
   const { data, error } = await supabase.select().eq("user_id", user_id);
-  // console.log(year);
+  console.log(error);
 
   const timeline = data.filter((timeline, i) => {
     if (timeline["year"] == year) return timeline;
@@ -109,6 +109,107 @@ export async function create(state, formData) {
       image_3: path_image_3,
       created_at: new Date().toISOString(),
     })
+    .select();
+
+  const user = data[0];
+
+  if (!user) {
+    console.log("error");
+    return {
+      message: "An error occurred while creating your timeline.",
+    };
+  }
+  redirect("/accounts");
+}
+
+export async function update(state, formData) {
+  // return;
+
+  const validatedFields = TimelineUpdateFormSchema.safeParse({
+    year: formData.get("year"),
+    image_1: formData.get("image_1"),
+    image_2: formData.get("image_2"),
+    image_3: formData.get("image_3"),
+  });
+  console.log(validatedFields.data.year);
+
+  // If any form fields are invalid, return early
+  if (!validatedFields.success) {
+    return {
+      errors: validatedFields.error.flatten().fieldErrors,
+    };
+  }
+  const supabase = createSupabaseClient().from("Timelines");
+  const timeline_old = await getTimeline(validatedFields.data.year);
+
+  if (validatedFields.data.year != timeline_old.year) {
+    const timelines_old = (await supabase.select().eq("user_id", user_id)).data;
+    let yearExist = false;
+    timelines_old.forEach((timeline) => {
+      if (timeline.year == validatedFields.data.year) yearExist = true;
+    });
+    if (yearExist) {
+      return {
+        errors: { year: "Year is already have a timeline." },
+      };
+    }
+  }
+
+  const path_image_1 = timeline_old.image_1;
+  if (validatedFields.data.image_1.size != 0) {
+    const path_image_1 = (
+      await uploadImage({
+        file: validatedFields.data.image_1,
+        bucket: "cilukba",
+      })
+    ).path;
+
+    if (!path_image_1) {
+      console.log("path_image_1");
+      return;
+    }
+  }
+
+  const path_image_2 = timeline_old.image_2;
+  if (validatedFields.data.image_2.size != 0) {
+    const path_image_2 = (
+      await uploadImage({
+        file: validatedFields.data.image_2,
+        bucket: "cilukba",
+      })
+    ).path;
+
+    if (!path_image_2) {
+      console.log("path_image_2");
+      return;
+    }
+  }
+  const path_image_3 = timeline_old.image_3;
+  if (validatedFields.data.image_3.size != 0) {
+    const path_image_3 = (
+      await uploadImage({
+        file: validatedFields.data.image_3,
+        bucket: "cilukba",
+      })
+    ).path;
+
+    if (!path_image_3) {
+      console.log("path_image_3");
+      return;
+    }
+  }
+  const user_id = await getId();
+
+  const { data } = await supabase
+    .update({
+      user_id,
+      year: validatedFields.data.year,
+      image_1: path_image_1,
+      image_2: path_image_2,
+      image_3: path_image_3,
+      created_at: new Date().toISOString(),
+    })
+    .eq("id", timeline_old.id)
     .select();
 
   const user = data[0];
