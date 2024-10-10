@@ -11,7 +11,7 @@ export async function getPosts(timeline_id) {
 
   const { data, error } = await supabase.select().eq("timeline_id", timeline_id);
 
-  data.sort((a, b) => parseInt(a.year) - parseInt(b.year));
+  data?.sort((a, b) => parseInt(a.year) - parseInt(b.year));
 
   console.log(data);
 
