@@ -5,14 +5,14 @@ import { logout } from "../../../../actions/auth";
 import Navside from "../../../components/navside";
 import Add from "@/app/components/add";
 import Link from "next/link";
-import { getTimeline } from "../../../../actions/timeline";
-import { getPosts } from "../../../../actions/post";
-import { isEmpty } from "../../../../lib/utils";
+import { getTimeline } from "@/actions/timeline";
+import { getPosts } from "@/actions/post";
+import { isEmpty } from "@/lib/utils";
 import { RiAddLine, RiPencilLine } from "@remixicon/react";
 import Setting from "@/app/components/setting";
 
 export default async function Page({ params }) {
-  const timeline = await getTimeline(params?.year);
+  const timeline = await getTimeline(null, params?.year);
   const posts = await getPosts(timeline?.id);
   // console.log(timeline);
 

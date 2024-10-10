@@ -8,7 +8,7 @@ import Link from "next/link";
 import { getTimeline } from "@/actions/timeline";
 
 export default async function Page({ year }) {
-  const timeline = await getTimeline(year);
+  const timeline = await getTimeline(null, year);
   console.log(timeline);
 
   return (

@@ -55,7 +55,7 @@ export async function create(state, formData) {
       bucket: "cilukba",
     })
   ).path;
-  const { id } = await getTimeline(validatedFields.data.year);
+  const { id } = await getTimeline(null, validatedFields.data.year);
 
   if (!path_image) {
     console.log("path_image");
