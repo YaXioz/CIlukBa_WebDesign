@@ -5,9 +5,9 @@ import { logout } from "../../../../actions/auth";
 import Navside from "../../../components/navside";
 import Add from "@/app/components/add";
 import Link from "next/link";
-import { getTimeline } from "@/actions/timeline";
-import { getPosts } from "@/actions/post";
-import { isEmpty } from "@/lib/utils";
+import { getTimeline } from "../../../../../actions/timeline";
+import { getPosts } from "../../../../../actions/post";
+import { isEmpty } from "../../../../lib/utils";
 import { RiAddLine, RiPencilLine } from "@remixicon/react";
 import Setting from "@/app/components/setting";
 
