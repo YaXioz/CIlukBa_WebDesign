@@ -5,20 +5,37 @@ import { redirect } from "next/navigation";
 import { uploadImage } from "../supabase/storage/client";
 import { isEmpty } from "@/lib/utils";
 
-export async function getTimelines() {
+export async function getTimelines(username = null) {
   const supabase = createSupabaseClient().from("Timelines");
-  const user_id = await getId();
+  let user_id = null;
+  if (username) {
+    user_id = await getId(username);
+  } else {
+    user_id = await getId();
+  }
+
   console.log(user_id);
 
   const { data, error } = await supabase.select().eq("user_id", user_id);
+
+  data.sort((a, b) => parseInt(a.year) - parseInt(b.year));
 
   console.log(data);
 
   return data;
 }
-export async function getTimeline(year) {
+
+export async function getTimeline(username = null, year) {
   const supabase = createSupabaseClient().from("Timelines");
-  const user_id = await getId();
+  console.log(`getTiimeline : ${username}`);
+  console.log(`getTiimeline : ${year}`);
+
+  let user_id = null;
+  if (username) {
+    user_id = await getId(username);
+  } else {
+    user_id = await getId();
+  }
 
   const { data, error } = await supabase.select().eq("user_id", user_id);
   console.log(error);
@@ -112,6 +129,7 @@ export async function create(state, formData) {
     .select();
 
   const user = data[0];
+  console.log(user);
 
   if (!user) {
     console.log("error");
@@ -155,45 +173,45 @@ export async function update(state, formData) {
     }
   }
 
-  const path_image_1 = timeline_old.image_1;
+  let path_image_1 = timeline_old.image_1;
   if (validatedFields.data.image_1.size != 0) {
-    const path_image_1 = (
+    path_image_1 = (
       await uploadImage({
         file: validatedFields.data.image_1,
         bucket: "cilukba",
       })
     ).path;
 
-    if (!path_image_1) {
+    if (path_image_1 == timeline_old.image_1) {
       console.log("path_image_1");
       return;
     }
   }
 
-  const path_image_2 = timeline_old.image_2;
+  let path_image_2 = timeline_old.image_2;
   if (validatedFields.data.image_2.size != 0) {
-    const path_image_2 = (
+    path_image_2 = (
       await uploadImage({
         file: validatedFields.data.image_2,
         bucket: "cilukba",
       })
     ).path;
 
-    if (!path_image_2) {
+    if (path_image_2 == timeline_old.image_2) {
       console.log("path_image_2");
       return;
     }
   }
-  const path_image_3 = timeline_old.image_3;
+  let path_image_3 = timeline_old.image_3;
   if (validatedFields.data.image_3.size != 0) {
-    const path_image_3 = (
+    path_image_3 = (
       await uploadImage({
         file: validatedFields.data.image_3,
         bucket: "cilukba",
       })
     ).path;
 
-    if (!path_image_3) {
+    if (path_image_3 == timeline_old.image_3) {
       console.log("path_image_3");
       return;
     }
