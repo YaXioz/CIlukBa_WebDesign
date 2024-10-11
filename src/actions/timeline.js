@@ -158,7 +158,7 @@ export async function update(state, formData) {
     };
   }
   const supabase = createSupabaseClient().from("Timelines");
-  const timeline_old = await getTimeline(validatedFields.data.year);
+  const timeline_old = await getTimeline(null, validatedFields.data.year);
 
   if (validatedFields.data.year != timeline_old.year) {
     const timelines_old = (await supabase.select().eq("user_id", user_id)).data;

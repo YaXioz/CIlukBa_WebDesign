@@ -12,8 +12,8 @@ import { RiAddLine, RiPencilLine } from "@remixicon/react";
 import Setting from "@/app/components/setting";
 
 export default async function Page({ params }) {
-  const timeline = await getTimeline(params.year);
-  const posts = await getPosts(timeline.id);
+  const timeline = await getTimeline(null, params?.year);
+  const posts = await getPosts(timeline?.id);
   // console.log(timeline);
 
   return (

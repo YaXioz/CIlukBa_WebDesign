@@ -1,15 +1,19 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @next/next/no-img-element */
-
+"use client";
 import { getTimeline, getTimelines } from "../../../actions/timeline";
 import { getPosts } from "../../../actions/post";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
-export default async function Page({ params }) {
-  console.log(`params 1: ${params.slug[0]}`);
-  console.log(`params 2: ${params.slug[1]}`);
+export default function Page({ params }) {
+  // console.log(`params 1: ${params.slug[0]}`);
+  // console.log(`params 2: ${params.slug[1]}`);
+  const [posts, setPosts] = useState([]);
+  const [timelines, setTimelines] = useState([]);
+  const [timeline, setTimeline] = useState({});
 
-  const timelines = await getTimelines(params.slug[0]);
+  // const timelines = await getTimelines(params.slug[0]);
   let prevYear = null;
   let nextYear = null;
   timelines.forEach((val, i) => {
@@ -19,8 +23,22 @@ export default async function Page({ params }) {
       return;
     }
   });
-  const timeline = await getTimeline(params.slug[0], params.slug[1]);
-  const posts = (await getPosts(timeline.id)) ?? [];
+  // const timeline = await getTimeline(params.slug[0], params.slug[1]);
+  // const posts = (await getPosts(timeline.id)) ?? [];
+  useEffect(() => {
+    getTimelinesAll();
+    getTimelineAll();
+    getPostsAll();
+  });
+  async function getPostsAll() {
+    setPosts((await getPosts(timeline.id)) ?? []);
+  }
+  async function getTimelinesAll() {
+    setTimelines(await getTimelines(params.slug[0]));
+  }
+  async function getTimelineAll() {
+    setTimeline(await getTimeline(params.slug[0], params.slug[1]));
+  }
 
   return (
     <div>
@@ -30,10 +48,10 @@ export default async function Page({ params }) {
       {posts.map((post, i) => (
         <div key={i}>
           <div className="w-full h-[1.5px]  bg-black"></div>
-          <div className="h-screen w-screen bg-[#e7f4ff] flex flex-row justify-evenly items-center" key={i}>
-            <div className="text-[#101018] text-center">
-              <div className="w-full font-semibold text-5xl py-3">{post?.event_date}</div>
-              <div className="w-full font-normal text-2xl py-3">{post?.description}</div>
+          <div className="h-screen w-screen bg-[#e7f4ff] flex flex-row justify-around items-center" key={i}>
+            <div className="text-[#101018]  w-[35vw]">
+              <div className="w-full text-center  font-semibold text-5xl py-3">{post?.event_date}</div>
+              <div className="w-full text-justify font-normal text-2xl py-3">{post?.description}</div>
             </div>
             <div>
               <img src={`${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/cilukba/${post?.image}`} alt="" className="w-[550px] h-[550px] object-cover" />
