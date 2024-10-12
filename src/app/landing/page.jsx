@@ -3,6 +3,18 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 
+function onTap(event, info) {
+  console.log(info.point.x, info.point.y)
+}
+
+function onTapStart(event, info) {
+  console.log(info.point.x, info.point.y)
+}
+
+function onTapCancel(event, info) {
+  console.log(info.point.x, info.point.y)
+}
+
 export default function Page() {
   return (
     <div className="w-screen h-screen relative bg-[#000000] overflow-hidden [mask-image:linear-gradient(to-bottom,transparent,black_10%,black_90%,transparent)]">
@@ -86,19 +98,35 @@ export default function Page() {
       </div>
 
       {/* Start Button */}
-      <div className="startButton lg:mt-14 md:mt-12 sm:mt-10 left-1/2 translate-x-[-50%] lg:w-[275px] lg:h-[75px] md:w-[230px] md:h-[60px] sm:w-[195px] sm:h-[45px] relative cursor-pointer py-2 px-3 rounded-full bg-gradient-to-b from-[#2b1551] to-[#6b3db1] shadow-[0px_0px_12px_#8c45ff] overflow-hidden transform hover:scale-105 transition duration-300 ease-out z-10">
+      <motion.div 
+        style={{
+          translateY: "-50%",
+          translateX: "-50%",
+        }}
+        whileHover={{ 
+        scale: 1.2 
+        }}
+        onHoverStart={e => {}}
+        onHoverEnd={e => {}}
+        whileTap={{ 
+          scale: 1 
+        }}
+        onTap={onTap}
+        onTapStart={onTapStart}
+        onTapCancel={onTapCancel}
+        className="startButton lg:mt-24 md:mt-20 sm:mt-16 left-1/2 translate-x-[-50%] lg:w-[210px] lg:h-[50px] md:w-[190px] md:h-[45px] sm:w-[170px] sm:h-[43px] relative cursor-pointer py-2 px-3 rounded-full bg-gradient-to-b from-[#2b1551] to-[#6b3db1] shadow-[0px_0px_12px_#8c45ff] overflow-hidden z-10">
         <div className="absolute inset-0">
-          <div className="border border-white/20 absolute inset-0 [mask-image:linear-gradient(to_bottom,black,transparent)]"></div>  
-          <div className="border absolute inset-0 border-white/40 [mask-image:linear-gradient(to_top,black,transparent)]"></div>
-          <div className="absolute inset-0 shadow-[0_0_10px_rgb(140,69,255,.7)_inset] rounded-lg"></div>
+        <div className="border border-white/20 absolute inset-0 [mask-image:linear-gradient(to_bottom,black,transparent)]"></div>  
+        <div className="border absolute inset-0 border-white/40 [mask-image:linear-gradient(to_top,black,transparent)]"></div>
+        <div className="absolute inset-0 shadow-[0_0_10px_rgb(140,69,255,.7)_inset] rounded-lg"></div>
         </div>  
         <Link
-          className="buttonText lg:left-[16px] md:left-[13px] sm:left-[14px] -top-5 lg:mt-10 md:mt-9 sm:mt-8 absolute text-white lg:text-2xl md:text-xl sm:text-base font-semibold font-montserrat"
+          className="buttonText lg:left-[13px] md:left-[13px] sm:left-[12px] -top-5 lg:mt-8 md:mt-8 sm:mt-8 absolute text-white lg:text-lg md:text-base sm:text-sm font-semibold font-montserrat"
           href="/signup"
         >
           Start Making Journey
         </Link>
-      </div>
+      </motion.div>
     </div>
   );
 }
