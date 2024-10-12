@@ -75,7 +75,7 @@ export default function Page() {
         whileHover={{ scale: 1.2 }}
         whileTap={{ scale: 0.9 }}
         className="w-36 h-10 mt-8 relative cursor-pointer rounded-full bg-gradient-to-b from-[#2b1551] to-[#6b3db1] shadow-[0px_0px_12px_#8c45ff] overflow-hidden z-10 mx-auto">
-          <Link href={"/accounts"}> {/* Ganti dengan path halaman akun sesuai aplikasi kamu */}
+          <Link href="/account"> {/* Ganti dengan path halaman akun sesuai aplikasi kamu */}
             <div className="text-white mt-2 ml-2 font-semibold">
               Back to Account
             </div>
