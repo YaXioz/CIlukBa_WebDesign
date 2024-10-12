@@ -2,13 +2,14 @@
 import { create } from "../../../../actions/timeline";
 import { useFormState, useFormStatus } from "react-dom";
 import { motion } from 'framer-motion';
+import Link from "next/link"; // Import Link dari Next.js
 
 export default function Page() {
   const [state, action] = useFormState(create, undefined);
 
   return (
-    <div className="mt-40 flex justify-center">
-      <form action={action} className="w-full max-w-md"> {/* Maksimal lebar form diatur */}
+    <div className="min-h-screen flex justify-center items-center">
+      <form action={action} className="w-full max-w-md bg-[#1A0733] p-6 rounded-lg shadow-lg">
         <div className="grid mb-6">
           <label htmlFor="year" className="mb-2 text-[#f5f5f5] font-semibold">
             Year
@@ -68,6 +69,18 @@ export default function Page() {
         <div className="mt-12 flex justify-center">
           <SubmitButton />
         </div>
+
+        {/* Tombol Back */}
+        <motion.div
+        whileHover={{ scale: 1.2 }}
+        whileTap={{ scale: 0.9 }}
+        className="w-36 h-10 mt-8 relative cursor-pointer rounded-full bg-gradient-to-b from-[#2b1551] to-[#6b3db1] shadow-[0px_0px_12px_#8c45ff] overflow-hidden z-10 mx-auto">
+          <Link href={"/accounts"}> {/* Ganti dengan path halaman akun sesuai aplikasi kamu */}
+            <div className="text-white mt-2 ml-2 font-semibold">
+              Back to Account
+            </div>
+          </Link>
+        </motion.div>
       </form>
     </div>
   );
@@ -78,13 +91,9 @@ function SubmitButton() {
 
   return (
     <motion.button
-      style={{
-        translateY: "-50%",
-        translateX: "-50%",
-      }}
       whileHover={{ scale: 1.2 }}
-      whileTap={{ scale: 1 }}
-      className="w-32 h-10 mt-8 relative cursor-pointer left-16 py-2 px-3 rounded-full bg-gradient-to-b from-[#2b1551] to-[#6b3db1] shadow-[0px_0px_12px_#8c45ff] overflow-hidden z-10 mx-auto"
+      whileTap={{ scale: 0.9 }}
+      className="w-32 h-10 mt-8 relative cursor-pointer rounded-full bg-gradient-to-b from-[#2b1551] to-[#6b3db1] shadow-[0px_0px_12px_#8c45ff] overflow-hidden z-10 mx-auto"
       disabled={pending}
       type="submit"
     >
