@@ -14,7 +14,7 @@ export default function ZoomTimeline({ timelines, username }) {
 
   useGSAP(
     () => {
-      const sectionHeight = (document.body.scrollHeight - window.innerHeight) / 5;
+      // const sectionHeight = (document.body.scrollHeight - window.innerHeight) / 5;
       // const slides = gsap.utils.toArray(".slide");
       // slides.forEach((slide, index) => {});
       // gsap.to("#circle img", {
@@ -30,7 +30,7 @@ export default function ZoomTimeline({ timelines, username }) {
       //     scrub: 1,
       //   },
       // });
-      let iteration = 0;
+      // let iteration = 0;
       const tl = gsap
         .timeline({
           scrollTrigger: {
