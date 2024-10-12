@@ -10,10 +10,13 @@ import { getUser } from "../../../actions/profile";
 import { useFormState, useFormStatus } from "react-dom";
 import Setting from "../../components/setting";
 import { useEffect, useState } from "react";
+import { motion } from 'framer-motion';
 
 export default function Page() {
   const [state, action] = useFormState(update, undefined);
   const [profile, setProfile] = useState({});
+  const [selectedImage, setSelectedImage] = useState(null); // State untuk gambar yang diunggah
+
   useEffect(() => {
     getProfile();
   }, []);
@@ -24,72 +27,157 @@ export default function Page() {
     console.log(profile);
   };
 
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    setSelectedImage(URL.createObjectURL(file)); // Menampilkan gambar yang dipilih
+  };
+ 
   return (
-    <div className="w-full flex bg-[#171D22]">
-      <div className=" my-16 container flex justify-between gap-10 flex-row mx-auto ">
+    <div className="w-full flex bg-gradient-to-br from-[#1A0733] to-[#5E27D1] h-screen overflow-hidden">
+      <div className="my-14 container flex justify-between gap-10 flex-row mx-auto">
+        {/* Sidebar */}
         <aside className="max-w-max">
-          <Navside></Navside>
+          <Navside className="text-white"></Navside>
         </aside>
-        <div className="container  rounded-lg flex flex-col items-center h-screen">
-          <div>
-            <Image src="/image/profile-picture.png" alt="" width={100} height={90} className="rounded-full mb-6 bg-[#666666]" />
+
+        {/* Main Content */}
+        <div className="container bg-[#10071d] bg-[url('/public/image/stars.png')] bg-cover rounded-xl flex flex-col items-center py-8 px-6 shadow-xl space-y-2">
+          {/* Profile Image */}
+          <div className="relative mb-6">
+            <img
+              src={selectedImage || "/image/profile-picture.png"} // Menampilkan gambar yang diunggah atau default
+              alt="Profile Picture"
+              className="rounded-full shadow-lg border-4 border-[#5E27D1] object-cover w-[90px] h-[90px]" // Ukuran tetap untuk gambar
+            />
+            {/* Button Upload */}
+            <label
+              htmlFor="profileImage"
+              className="absolute bottom-0 right-0 bg-[#5E27D1] text-white p-2 rounded-full cursor-pointer"
+            >
+              <input
+                type="file"
+                id="profileImage"
+                className="hidden"
+                accept="image/*"
+                onChange={handleImageChange} // Mengubah gambar saat diunggah
+              />
+              Edit
+            </label>
           </div>
-          <form action={action}>
-            <div className="grid mb-6">
-              <label htmlFor="username" className="mb-2 text-[#333333] font-semibold">
+
+          {/* Form */}
+          <form action={action} className="w-full max-w-md space-y-6">
+            <div className="grid">
+              <label htmlFor="username" className="mb-2 text-white font-semibold">
                 Username
               </label>
-              <input className="bg-[#d9d9d9] p-2 text-black rounded-lg" id="username" type="text" name="username" placeholder={`${profile.username}` ?? "Enter username"} />
+              <input
+                className="bg-[#252A34] p-3 text-white rounded-lg border border-[#5E27D1] focus:ring-2 focus:ring-[#8C57F1] transition-all"
+                id="username"
+                type="text"
+                name="username"
+                placeholder={`${profile.username}` ?? "Enter username"}
+              />
             </div>
-            {state?.errors?.username && <p>{state.errors.username}</p>}
-            <div className="grid mb-6">
-              <label htmlFor="name" className="mb-2 text-[#333333] font-semibold">
+            {state?.errors?.username && <p className="text-red-500">{state.errors.username}</p>}
+
+            <div className="grid">
+              <label htmlFor="name" className="mb-2 text-white font-semibold">
                 Name
               </label>
-              <input className="bg-[#d9d9d9] p-2 text-black rounded-lg" id="name" type="text" name="name" placeholder={`${profile.name}` ?? "Enter your name"} />
+              <input
+                className="bg-[#252A34] p-3 text-white rounded-lg border border-[#5E27D1] focus:ring-2 focus:ring-[#8C57F1] transition-all"
+                id="name"
+                type="text"
+                name="name"
+                placeholder={`${profile.name}` ?? "Enter your name"}
+              />
             </div>
-            {state?.errors?.name && <p>{state.errors.name}</p>}
-            <div className="grid mb-6">
-              <label htmlFor="bio" className="mb-2 text-[#333333] font-semibold">
+            {state?.errors?.name && <p className="text-red-500">{state.errors.name}</p>}
+
+            <div className="grid">
+              <label htmlFor="bio" className="mb-2 text-white font-semibold">
                 Bio
               </label>
-              <input className="bg-[#d9d9d9] p-2 text-black rounded-lg" id="bio" type="text" name="bio" placeholder={profile.bio ? `${profile.bio}` : "Enter your bio"} />
+              <input
+                className="bg-[#252A34] p-3 text-white rounded-lg border border-[#5E27D1] focus:ring-2 focus:ring-[#8C57F1] transition-all"
+                id="bio"
+                type="text"
+                name="bio"
+                placeholder={profile.bio ? `${profile.bio}` : "Enter your bio"}
+              />
             </div>
-            {state?.errors?.bio && <p>{state.errors.bio}</p>}
-            <div className="grid mb-6">
-              <label htmlFor="email" className="mb-2 text-[#333333] font-semibold">
-                email
+            {state?.errors?.bio && <p className="text-red-500">{state.errors.bio}</p>}
+
+            <div className="grid">
+              <label htmlFor="email" className="mb-2 text-white font-semibold">
+                Email
               </label>
-              <input className="bg-[#d9d9d9] p-2 text-black rounded-lg" id="email" type="email" name="email" placeholder={`${profile.email}` ?? "Enter email"} />
+              <input
+                className="bg-[#252A34] p-3 text-white rounded-lg border border-[#5E27D1] focus:ring-2 focus:ring-[#8C57F1] transition-all"
+                id="email"
+                type="email"
+                name="email"
+                placeholder={`${profile.email}` ?? "Enter email"}
+              />
             </div>
-            {state?.errors?.email && <p>{state.errors.email}</p>}
-            <div className="grid mb-6">
-              <label htmlFor="password" className="mb-2 text-[#333333] font-semibold">
-                password
+            {state?.errors?.email && <p className="text-red-500">{state.errors.email}</p>}
+
+            <div className="grid">
+              <label htmlFor="password" className="mb-2 text-white font-semibold">
+                Password
               </label>
-              <input className="bg-[#d9d9d9] p-2 text-black rounded-lg" id="password" type="password" name="password" placeholder={"Enter new password"} />
+              <input
+                className="bg-[#252A34] p-3 text-white rounded-lg border border-[#5E27D1] focus:ring-2 focus:ring-[#8C57F1] transition-all"
+                id="password"
+                type="password"
+                name="password"
+                placeholder={"Enter new password"}
+              />
             </div>
-            {state?.errors?.password && <p>{state.errors.password}</p>}
-            <div className="mt-12 flex justify-center">
+            {state?.errors?.password && <p className="text-red-500">{state.errors.password}</p>}
+
+            {/* Submit Button */}
+            <div className="mt-8 flex justify-center">
               <SubmitButton />
             </div>
           </form>
         </div>
+
+        {/* Settings Sidebar */}
         <aside className="max-w-max">
-          <Setting />
+          <Setting className="text-white" />
         </aside>
       </div>
     </div>
   );
 }
+
 function SubmitButton() {
   const { pending } = useFormStatus();
 
   return (
-    <button className="mx-auto h-16 w-64 flex justify-center items-center" disabled={pending} type="submit">
-      <div className="h-16 w-64 bg-gradient-to-br from-blue-400 to-blue-900 items-center rounded-full shadow-2xl cursor-pointer absolute overflow-hidden transform hover:scale-x-110 hover:scale-y-105 transition duration-300 ease-out"></div>
-      <div className="text-center text-white font-semibold z-10 w-full">Save</div>
-      <div className="h-16 w-64 bg-gradient-to-br from-blue-400 to-blue-900 items-center rounded-full shadow-2xl cursor-pointer absolute overflow-hidden transform hover:scale-x-110 hover:scale-y-105 transition duration-300 ease-out"></div>
-    </button>
+    <motion.div
+      style={{
+        translateY: "-50%",
+        translateX: "-50%",
+      }}
+      whileHover={{ scale: 1.2 }}
+      whileTap={{ scale: 1 }}
+      className="w-32 h-10 mt-8 relative cursor-pointer left-16 py-2 px-3 rounded-full bg-gradient-to-b from-[#2b1551] to-[#6b3db1] shadow-[0px_0px_12px_#8c45ff] overflow-hidden z-10 mx-auto"
+    >
+      <div className="absolute inset-0">
+        <div className="border border-white/20 absolute inset-0 [mask-image:linear-gradient(to_bottom,black,transparent)]"></div>
+        <div className="border absolute inset-0 border-white/40 [mask-image:linear-gradient(to_top,black,transparent)]"></div>
+        <div className="absolute inset-0 shadow-[0_0_10px_rgb(140,69,255,.7)_inset] rounded-lg"></div>
+      </div>
+      <button
+        className="text-center text-white font-semibold z-10 w-full h-7"
+        disabled={pending}
+        type="submit"
+      >
+        Save
+      </button>
+    </motion.div>
   );
 }
