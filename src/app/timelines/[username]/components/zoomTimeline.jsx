@@ -5,6 +5,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Link from "next/link";
 import { useRef, useState } from "react";
 import { motion } from "framer-motion";
+import Navside from "./navside";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
@@ -149,7 +150,8 @@ export default function ZoomTimeline({ timelines, username }) {
 
   return (
     <div ref={main} className="bg-gradient-to-br from-purple-700 to-purple-800">
-      <div id="image" className="max-h-[100vh] max-w-[100vw] py-[35vh]">
+      <div id="image" className="max-h-[100vh] max-w-[100vw] py-[50vh]">
+        <Navside />
         <motion.div
           style={{
             translateY: "-50%",
@@ -208,11 +210,11 @@ export default function ZoomTimeline({ timelines, username }) {
         <Link
           href={`/posts/${username}/${timelines[contentIndex]?.year}`}
           id="year"
-          className="cursor-pointer absolute top-1/2 left-0 right-0 mx-auto text-center text-9xl opacity-0 z-10  [text-shadow:1px_1px_50px_var(--tw-shadow-color)] shadow-gray-950"
+          className="cursor-pointer absolute top-1/2 left-0 -translate-y-1/2 right-0 mx-auto text-center text-9xl opacity-0 z-10  [text-shadow:1px_1px_50px_var(--tw-shadow-color)] shadow-gray-950"
         >
           {timelines[contentIndex]?.year}
         </Link>
-        <div id="circle" className="bg-purple-900 rounded-full w-60 h-60 absolute top-1/2 left-0 right-0 mx-auto z-0">
+        <div id="circle" className="bg-purple-900 rounded-full w-60 h-60 absolute top-1/2 left-0 -translate-y-1/2 right-0 mx-auto z-0">
           <div className="bg-purple-950 rounded-full opacity-60 w-3/5 h-3/5 absolute top-0 bottom-0 left-0 right-0 m-auto z-[1]"></div>
           <div className="relative z-[2]">
             <img className="h-12 w-12 object-cover absolute top-16 left-8  rounded-full " src={`${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/cilukba/${timelines[contentIndex]?.image_1}`} alt="" />

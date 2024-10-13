@@ -4,7 +4,7 @@ import { logout } from "@/actions/auth";
 import { RiHome5Line, RiLogoutBoxLine, RiSearchLine } from "@remixicon/react";
 import Image from "next/image";
 import Link from "next/link";
-import { getUser } from "../../actions/profile";
+import { getUser } from "../../../../actions/profile";
 import { useEffect, useState } from "react";
 import SearchBox from "./searchBox";
 import { useRouter } from "next/navigation";
@@ -29,7 +29,7 @@ export default function Navside() {
   }
 
   return (
-    <div className="absolute  flex flex-row gap-3 items-center z-10">
+    <div className="absolute top-1/2 -translate-y-1/2 left-[5%]  flex flex-row gap-3 items-center z-10">
       {/* Futuristic Sidebar */}
       <div className="py-6 px-4 bg-gradient-to-br from-[#1A0733] to-[#252A34] text-white rounded-3xl text-center shadow-xl flex flex-col gap-8 items-center transition-all duration-300">
         {/* Logo */}
