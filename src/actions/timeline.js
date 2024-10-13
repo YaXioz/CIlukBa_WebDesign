@@ -232,6 +232,7 @@ export async function update(state, formData) {
       image_1: path_image_1,
       image_2: path_image_2,
       image_3: path_image_3,
+      created_at: timeline_old.created_at,
       updated_at: new Date().toISOString(),
     })
     .select();
