@@ -4,6 +4,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Link from "next/link";
 import { useRef, useState } from "react";
+import { motion } from "framer-motion";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
@@ -147,8 +148,62 @@ export default function ZoomTimeline({ timelines, username }) {
   );
 
   return (
-    <div ref={main} className="bg-blue-950">
+    <div ref={main} className="bg-gradient-to-br from-purple-700 to-purple-800">
       <div id="image" className="max-h-[100vh] max-w-[100vw] py-[35vh]">
+        <motion.div
+          style={{
+            translateY: "-50%",
+            translateX: "-50%",
+          }}
+          animate={{
+            rotate: "1turn",
+          }}
+          transition={{
+            repeat: Infinity,
+            duration: 30,
+            ease: "linear",
+          }}
+          className="absolute lg:w-[900px] lg:h-[900px] md:w-[700px] md:h-[700px] sm:w-[550px] sm:h-[550px]  border border-white opacity-20 rounded-full top-1/2 left-1/2 "
+        >
+          <div className="absolute h-2 w-2 bg-white rounded-full top-1/2 left-0 -translate-x-1/2 -translate-y-1/2"></div>
+          <div className="absolute h-2 w-2 bg-white rounded-full top-0 left-1/2 -translate-x-1/2 -translate-y-1/2"></div>
+          <div className="absolute h-5 w-5 border border-white rounded-full top-1/2 left-full -translate-x-1/2 -translate-y-1/2 inline-flex items-center justify-center">
+            <div className="h-2 w-2 bg-white rounded-full"></div>
+          </div>
+        </motion.div>
+        <motion.div
+          style={{
+            translateY: "-50%",
+            translateX: "-50%",
+          }}
+          animate={{
+            rotate: "-1turn",
+          }}
+          transition={{
+            repeat: Infinity,
+            duration: 120,
+            ease: "linear",
+          }}
+          className="absolute lg:h-[1210px] lg:w-[1210px] md:h-[950px] md:w-[950px] sm:h-[750px] sm:w-[750px] rounded-full border border-white/70 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 border-dashed"
+        ></motion.div>
+        <motion.div
+          style={{
+            translateY: "-50%",
+            translateX: "-50%",
+          }}
+          animate={{
+            rotate: "1turn",
+          }}
+          transition={{
+            repeat: Infinity,
+            duration: 60,
+            ease: "linear",
+          }}
+          className="absolute lg:h-[1675px] lg:w-[1675px] md:h-[1200px] md:w-[1200px] sm:h-[950px] sm:w-[950px] rounded-full border border-white opacity-20 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+        >
+          <div className="absolute h-2 w-2 bg-white rounded-full top-1/2 left-0 -translate-x-1/2 -translate-y-1/2"></div>
+          <div className="absolute h-2 w-2 bg-white rounded-full top-1/2 left-full -translate-x-1/2 -translate-y-1/2"></div>
+        </motion.div>
         {/* <Link href={`/accounts/${timelines[contentIndex]?.year}`}> */}
         <Link
           href={`/posts/${username}/${timelines[contentIndex]?.year}`}
@@ -157,8 +212,8 @@ export default function ZoomTimeline({ timelines, username }) {
         >
           {timelines[contentIndex]?.year}
         </Link>
-        <div id="circle" className="bg-blue-900 rounded-full w-60 h-60 absolute top-1/2 left-0 right-0 mx-auto z-0">
-          <div className="bg-blue-800 rounded-full opacity-60 w-3/5 h-3/5 absolute top-0 bottom-0 left-0 right-0 m-auto z-[1]"></div>
+        <div id="circle" className="bg-purple-900 rounded-full w-60 h-60 absolute top-1/2 left-0 right-0 mx-auto z-0">
+          <div className="bg-purple-950 rounded-full opacity-60 w-3/5 h-3/5 absolute top-0 bottom-0 left-0 right-0 m-auto z-[1]"></div>
           <div className="relative z-[2]">
             <img className="h-12 w-12 bg-cover absolute top-16 left-8  rounded-full " src={`${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/cilukba/${timelines[contentIndex]?.image_1}`} alt="" />
             <img className="h-12 w-12 bg-cover absolute top-10 right-10  rounded-full " src={`${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/cilukba/${timelines[contentIndex]?.image_2}`} alt="" />

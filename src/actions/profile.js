@@ -5,6 +5,7 @@ import createSupabaseClient from "../supabase/client";
 import { redirect } from "next/navigation";
 import { EditProfileFormSchema } from "@/lib/definitions";
 import { isEmpty } from "@/lib/utils";
+import { uploadImage } from "@/supabase/storage/client";
 
 export async function getId(username = null) {
   if (!username) {
@@ -39,6 +40,7 @@ export async function update(state, formData) {
     password: formData.get("password"),
     name: formData.get("name"),
     bio: formData.get("bio"),
+    picture: formData.get("picture"),
   });
 
   if (!validatedFields.success) {
@@ -69,7 +71,21 @@ export async function update(state, formData) {
   if (password) {
     hashedPassword = await argon.hash(password);
   }
-  console.log("mASUK");
+  console.log(validatedFields.data.picture);
+  let path = userOld.picture;
+  if (validatedFields.data.picture.size != 0) {
+    path = (
+      await uploadImage({
+        file: validatedFields.data.picture,
+        bucket: "cilukba",
+      })
+    ).path;
+
+    if (path == userOld.picture) {
+      console.log("path");
+      return;
+    }
+  }
   if (username.length == 0) {
     username = userOld.username;
   }
@@ -91,6 +107,7 @@ export async function update(state, formData) {
       password: hashedPassword,
       name: name,
       bio: bio,
+      picture: path,
     })
     .select();
 

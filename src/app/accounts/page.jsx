@@ -14,20 +14,24 @@ export default async function Page() {
 
   return (
     <div className="w-full flex bg-gradient-to-br from-[#1A0733] to-[#5E27D1] h-screen overflow-hidden">
-      <div className="my-16 container flex justify-between gap-10 flex-row mx-auto">
+      <div className="my-16 container relative  mx-auto">
         {/* Sidebar */}
         <aside className="max-w-max">
           <Navside />
         </aside>
 
         {/* Main Content */}
-        <div className="container bg-[#10071d]/80 rounded-xl flex flex-col items-center py-10 px-6 shadow-xl space-y-8 relative overflow-hidden">
+        <div className="m-auto left-0 right-0 w-3/4  container bg-[#10071d]/80 rounded-xl flex flex-col items-center py-10 px-6 shadow-xl space-y-8 relative overflow-hidden">
           {/* Box shadow effect */}
           <div className="absolute inset-0 bg-[#10071d] opacity-60 shadow-[0px_0px_50px_rgb(140,69,255),0px_0px_80px_rgb(255,255,255,.1),0_0_50px_rgb(140,69,255)] rounded-xl"></div>
 
           {/* Profile Section */}
-          <div className="relative z-10">
-            <Image src={profile?.profilePicture ?? "/image/profile-picture.png"} alt="Profile" width={120} height={120} className="rounded-full mb-6 bg-[#666666] border-4 border-[#fdfdfd] shadow-lg object-cover" />
+          <div className="relative w-32 h-32 z-10">
+            <img
+              src={profile?.picture ? `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/cilukba/${profile?.picture}` : "/image/profile-picture.png"}
+              alt="Profile"
+              className="rounded-full mb-6 bg-[#666666] border-4 border-[#fdfdfd] w-32 h-32 shadow-lg object-cover"
+            />
           </div>
 
           <div className="relative z-10 text-center space-y-2">
@@ -36,10 +40,10 @@ export default async function Page() {
           </div>
 
           {/* Timeline Cards */}
-          <div className="w-2/3 h-[50vh] flex flex-col gap-10 border-t border-[#8c45ff] pt-4 px-5 overflow-auto justify-start relative z-10">
+          <div className="w-2/3 h-[40vh] flex flex-col gap-10 border-t border-[#8c45ff] pt-4 px-5 overflow-auto justify-start relative z-10">
             {timelines.map((timeline, i) => (
               <div className="bg-[#252A34] text-white py-4 px-6 rounded-lg flex flex-row justify-between items-center shadow-[0px_0px_15px_#8c45ff] transition-all hover:shadow-[0px_0px_25px_#8c45ff]" key={i}>
-                <div className="text-3xl font-bold">{timeline["year"]} | </div>
+                <div className="text-3xl font-bold">{timeline["year"]}</div>
                 <div className="flex gap-5">
                   <Link href={`accounts/timeline/${timeline.year}`}>
                     <span className="cursor-pointer text-gray-500 hover:text-white transition-all duration-200">
@@ -55,13 +59,13 @@ export default async function Page() {
               </div>
             ))}
           </div>
+        </div>
 
-          {/* Add New Timeline Button */}
-          <div className="bottom-0 left-8 transform -translate-x-1/2 w-16 h-16 bg-gradient-to-t from-[#1A0733] to-[#6E27D1] rounded-full flex justify-center items-center shadow-[0px_0px_20px_#8c45ff] cursor-pointer transition-all hover:shadow-[0px_0px_30px_#8c45ff] relative z-10">
-            <Link href={"accounts/timeline/new"}>
-              <RiAddLine size={40} className="text-white" />
-            </Link>
-          </div>
+        {/* Add New Timeline Button */}
+        <div className="bottom-10 m-auto left-0 right-0 transform  w-20 h-20 bg-gradient-to-t from-[#1A0733] to-[#6E27D1] rounded-full flex justify-center items-center shadow-[0px_0px_20px_#8c45ff] cursor-pointer transition-all hover:shadow-[0px_0px_30px_#8c45ff] relative z-10">
+          <Link href={"accounts/timeline/new"}>
+            <RiAddLine size={40} className="text-white" />
+          </Link>
         </div>
 
         {/* Settings Sidebar */}

@@ -42,28 +42,29 @@ export default function Page() {
 
         {/* Main Content */}
         <div className="container bg-[#10071d] bg-[url('/public/image/stars.png')] bg-cover rounded-xl flex flex-col items-center py-8 px-6 shadow-xl space-y-2">
-          {/* Profile Image */}
-          <div className="relative mb-6">
-            <img
-              src={selectedImage || "/image/profile-picture.png"} // Menampilkan gambar yang diunggah atau default
-              alt="Profile Picture"
-              className="rounded-full shadow-lg border-4 border-[#5E27D1] object-cover w-[90px] h-[90px]" // Ukuran tetap untuk gambar
-            />
-            {/* Button Upload */}
-            <label htmlFor="profileImage" className="absolute bottom-0 right-0 bg-[#5E27D1] text-white p-2 rounded-full cursor-pointer">
-              <input
-                type="file"
-                id="profileImage"
-                className="hidden"
-                accept="image/*"
-                onChange={handleImageChange} // Mengubah gambar saat diunggah
-              />
-              Edit
-            </label>
-          </div>
-
-          {/* Form */}
           <form action={action} className="w-full max-w-md space-y-6">
+            {/* Profile Image */}
+            <div className="relative w-[90px] h-[90px] mx-auto mb-6">
+              <img
+                src={selectedImage || "/image/profile-picture.png"} // Menampilkan gambar yang diunggah atau default
+                alt="Profile Picture"
+                className="rounded-full shadow-lg border-4 border-[#5E27D1] object-cover w-[90px] h-[90px]" // Ukuran tetap untuk gambar
+              />
+              {/* Button Upload */}
+              <label htmlFor="picture" className="absolute bottom-0 right-0 bg-[#5E27D1] text-white p-2 rounded-full cursor-pointer">
+                <input
+                  type="file"
+                  id="picture"
+                  className="hidden"
+                  accept="image/*"
+                  name="picture"
+                  onChange={handleImageChange} // Mengubah gambar saat diunggah
+                />
+                Edit
+              </label>
+            </div>
+
+            {/* Form */}
             <div className="grid">
               <label htmlFor="username" className="mb-2 text-white font-semibold">
                 Username
