@@ -4,7 +4,7 @@
 import { useFormState, useFormStatus } from "react-dom";
 import { signin } from "../../actions/auth";
 import Link from "next/link";
-import { motion } from 'framer-motion';
+import { motion } from "framer-motion";
 
 export default function SigninForm() {
   const [state, action] = useFormState(signin, undefined);
@@ -23,24 +23,12 @@ export default function SigninForm() {
 
               <form action={action} method="post" className="w-full px-7">
                 <div className="grid mb-8">
-                  <input
-                    className="bg-purple-500/20 focus:bg-purple-500/30 px-10 py-5 text-white/70 outline-none placeholder:text-white/35 rounded-2xl w-full"
-                    id="email"
-                    name="email"
-                    type="email"
-                    placeholder="Email"
-                  />
+                  <input className="bg-purple-500/20 focus:bg-purple-500/30 px-10 py-5 text-white/70 outline-none placeholder:text-white/35 rounded-2xl w-full" id="email" name="email" type="email" placeholder="Email" />
                 </div>
                 {state?.errors?.email && <p className="text-red-500">{state.errors.email}</p>}
 
                 <div className="grid mb-12">
-                  <input
-                    className="bg-purple-500/20 focus:bg-purple-500/30 px-10 py-5 text-white/70 outline-none placeholder:text-white/35 rounded-2xl w-full"
-                    id="password"
-                    name="password"
-                    type="password"
-                    placeholder="Password"
-                  />
+                  <input className="bg-purple-500/20 focus:bg-purple-500/30 px-10 py-5 text-white/70 outline-none placeholder:text-white/35 rounded-2xl w-full" id="password" name="password" type="password" placeholder="Password" />
                 </div>
                 {state?.errors?.password && <p className="text-red-500">{state.errors.password}</p>}
 
@@ -49,9 +37,9 @@ export default function SigninForm() {
                 </div>
               </form>
 
-              <div className="mt-12 ps-8 self-start">
+              <div className="mt-12 ">
                 <div className="inline"></div>
-                <Link className="text-white ms-[110px] inline hover:text-purple-400" href="/signup">
+                <Link className="text-white  inline hover:text-purple-400" href="/signup">
                   Don&apos;t have an account?
                 </Link>
               </div>
@@ -74,9 +62,7 @@ function SubmitButton() {
       disabled={pending}
       type="submit"
     >
-      <div className="relative text-center text-white font-semibold z-10">
-        {pending ? "Signing In..." : "Sign In"}
-      </div>
+      <div className="relative text-center text-white font-semibold z-10">{pending ? "Signing In..." : "Sign In"}</div>
     </motion.button>
   );
 }
