@@ -25,6 +25,12 @@ export async function getTimelines(username = null) {
   return data;
 }
 
+export async function getTimelineById(id) {
+  const supabase = createSupabaseClient().from("Timelines");
+  const { data } = await supabase.select().eq("id", id);
+  return data[0];
+}
+
 export async function getTimeline(username = null, year) {
   const supabase = createSupabaseClient().from("Timelines");
   console.log(`getTiimeline : ${username}`);

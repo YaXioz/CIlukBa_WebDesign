@@ -31,7 +31,7 @@ export default async function Page({ params }) {
           ) : (
             <div className="grid grid-cols-3 gap-3 border-t border-[#d9d9d9] p-5">
               {posts?.map((post, i) => (
-                <Link href={`/accounts/post/edit/${post?.url}`} key={i} className="transition-transform transform hover:scale-105">
+                <Link href={`/accounts/post/edit/${params?.year}/${post?.url}`} key={i} className="transition-transform transform hover:scale-105">
                   <img
                     src={`${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/cilukba/${post?.image}`}
                     className="w-[240px] h-[240px] object-cover rounded-lg shadow-lg transition-transform duration-300 hover:shadow-2xl hover:contrast-75"

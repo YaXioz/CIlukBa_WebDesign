@@ -106,3 +106,17 @@ export const PostCreateFormSchema = z.object({
   description: z.string().trim(),
   event_date: z.coerce.date(),
 });
+export const PostUpdateFormSchema = z.object({
+  year: z.number().gte(1900, { message: "Year must be above 1899" }).lte(2025, { message: "Year must be below 2026" }),
+  image: z
+    .any()
+    .refine((file) => file?.size <= 0)
+    .or(
+      z
+        .any()
+        .refine((file) => file?.size <= MAX_FILE_SIZE, `Max image size is 5MB.`)
+        .refine((file) => ACCEPTED_IMAGE_TYPES.includes(file?.type), "Only .jpg, .jpeg, .png and .heic formats are supported.")
+    ),
+  description: z.string().trim(),
+  event_date: z.coerce.date(),
+});
