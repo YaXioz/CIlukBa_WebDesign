@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { logout } from "../../../../actions/auth";
 import Navside from "../../../components/navside";
-import Add from "@/app/components/add"; 
+import Add from "@/app/components/add";
 import Link from "next/link";
 import { getTimeline } from "@/actions/timeline";
 import { getPosts } from "@/actions/post";
@@ -23,19 +23,15 @@ export default async function Page({ params }) {
         </aside>
         <div className="container bg-[#171D22] rounded-lg flex flex-col items-center h-screen">
           <Link className="w-full" href={"/accounts"}>
-            <div className="bg-[#6E27D1] text-white py-2 px-4 rounded-lg text-center transition-transform transform hover:scale-105 hover:shadow-lg">
-              &lt; Back
-            </div>
+            <div className="bg-[#6E27D1] text-white py-2 px-4 rounded-lg text-center transition-transform transform hover:scale-105 hover:shadow-lg">&lt; Back</div>
           </Link>
           <h1 className="text-white font-bold text-5xl p-8">{params.year}</h1>
           {isEmpty(posts) ? (
-            <div className="text-center w-[70vh] border-t border-[#d9d9d9] p-10 text-[#f5f5f5]">
-              No post has been created
-            </div>
+            <div className="text-center w-[70vh] border-t border-[#d9d9d9] p-10 text-[#f5f5f5]">No post has been created</div>
           ) : (
             <div className="grid grid-cols-3 gap-3 border-t border-[#d9d9d9] p-5">
               {posts?.map((post, i) => (
-                <Link href={`/post/${post?.url}`} key={i} className="transition-transform transform hover:scale-105">
+                <Link href={`/accounts/post/edit/${post?.url}`} key={i} className="transition-transform transform hover:scale-105">
                   <img
                     src={`${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/cilukba/${post?.image}`}
                     className="w-[240px] h-[240px] object-cover rounded-lg shadow-lg transition-transform duration-300 hover:shadow-2xl hover:contrast-75"

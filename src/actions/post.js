@@ -92,4 +92,14 @@ export async function update(state, formData) {
     description: formData.get("description"),
     event_date: formData.get("event_date"),
   });
+
+  if (!validatedFields.success) {
+    return {
+      errors: validatedFields.error.flatten().fieldErrors,
+    };
+  }
+  if (validatedFields.data.year != validatedFields.data.event_date.getFullYear())
+    return {
+      errors: { event_date: "Event date must match the year of timeline." },
+    };
 }

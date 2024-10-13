@@ -70,6 +70,33 @@ export const TimelineUpdateFormSchema = z.object({
     ),
 });
 
+export const EditProfileFormSchema = z.object({
+  username: z
+    .string()
+    .length(0)
+    .or(z.string().min(2, { message: "Username must be at least 2 characters long." }).trim()),
+  email: z
+    .string()
+    .length(0)
+    .or(z.string().email({ message: "Please enter a valid email." }).trim()),
+  password: z
+    .string()
+    .length(0)
+    .or(
+      z
+        .string()
+        .min(8, { message: "Be at least 8 characters long" })
+        .regex(/[a-zA-Z]/, { message: "Contain at least one letter." })
+        .regex(/[0-9]/, { message: "Contain at least one number." })
+        .regex(/[^a-zA-Z0-9]/, {
+          message: "Contain at least one special character.",
+        })
+        .trim()
+    ),
+  name: z.string().trim(),
+  bio: z.string().trim(),
+});
+
 export const PostCreateFormSchema = z.object({
   year: z.number().gte(1900, { message: "Year must be above 1899" }).lte(2025, { message: "Year must be below 2026" }),
   image: z

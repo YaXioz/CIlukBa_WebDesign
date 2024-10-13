@@ -2,6 +2,9 @@
 import { cookies } from "next/headers";
 import { decrypt } from "../lib/session";
 import createSupabaseClient from "../supabase/client";
+import { redirect } from "next/navigation";
+import { EditProfileFormSchema } from "@/lib/definitions";
+import { isEmpty } from "@/lib/utils";
 
 export async function getId(username = null) {
   if (!username) {
@@ -20,15 +23,87 @@ export async function getUser() {
   const userId = await getId();
 
   const { data, error } = await supabase.from("Users").select().eq("id", userId);
-  console.log(data[0]);
+  // console.log(data[0]);
 
   return data[0];
 }
 
-export async function update() {
-  const supabase = createSupabaseClient();
+export async function update(state, formData) {
+  const supabase = createSupabaseClient().from("Users");
 
-  const { data, error } = supabase.from("Users");
+  const userOld = await getUser();
+
+  const validatedFields = EditProfileFormSchema.safeParse({
+    username: formData.get("username"),
+    email: formData.get("email"),
+    password: formData.get("password"),
+    name: formData.get("name"),
+    bio: formData.get("bio"),
+  });
+
+  if (!validatedFields.success) {
+    return {
+      errors: validatedFields.error.flatten().fieldErrors,
+    };
+  }
+
+  // 2. Prepare data for insertion into database
+  let { username, email, password, name, bio } = validatedFields.data;
+  //   check if username or email already registered
+  if (username != userOld.username) {
+    const checkUsername = (await supabase.select().eq("username", username)).error;
+    if (!isEmpty(checkUsername))
+      return {
+        errors: { username: "Username is already registered" },
+      };
+  }
+  if (email != userOld.email) {
+    const checkEmail = (await supabase.select().eq("email", email)).error;
+    if (!isEmpty(checkEmail))
+      return {
+        errors: { email: "Email is already registered" },
+      };
+  }
+  // e.g. Hash the user's password before storing it
+  let hashedPassword = userOld.password;
+  if (password) {
+    hashedPassword = await argon.hash(password);
+  }
+  console.log("mASUK");
+  if (username.length == 0) {
+    username = userOld.username;
+  }
+  if (email.length == 0) {
+    email = userOld.email;
+  }
+  if (name.length == 0) {
+    name = userOld.name;
+  }
+  if (bio.length == 0) {
+    bio = userOld.bio;
+  }
+  // 3. Insert the user into the database or call an Library API
+  const { data } = await supabase
+    .upsert({
+      id: userOld.id,
+      username: username,
+      email: email,
+      password: hashedPassword,
+      name: name,
+      bio: bio,
+    })
+    .select();
+
+  const user = data[0];
+  // console.log(upp);
+
+  if (!user) {
+    return {
+      message: "An error occurred while creating your account.",
+    };
+  }
+  // return;
+  redirect("/accounts");
 }
 
 export async function searchUser(param) {

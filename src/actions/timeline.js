@@ -219,15 +219,15 @@ export async function update(state, formData) {
   const user_id = await getId();
 
   const { data } = await supabase
-    .update({
+    .upsert({
+      id: timeline_old.id,
       user_id,
       year: validatedFields.data.year,
       image_1: path_image_1,
       image_2: path_image_2,
       image_3: path_image_3,
-      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
     })
-    .eq("id", timeline_old.id)
     .select();
 
   const user = data[0];
