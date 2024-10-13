@@ -215,9 +215,9 @@ export default function ZoomTimeline({ timelines, username }) {
         <div id="circle" className="bg-purple-900 rounded-full w-60 h-60 absolute top-1/2 left-0 right-0 mx-auto z-0">
           <div className="bg-purple-950 rounded-full opacity-60 w-3/5 h-3/5 absolute top-0 bottom-0 left-0 right-0 m-auto z-[1]"></div>
           <div className="relative z-[2]">
-            <img className="h-12 w-12 bg-cover absolute top-16 left-8  rounded-full " src={`${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/cilukba/${timelines[contentIndex]?.image_1}`} alt="" />
-            <img className="h-12 w-12 bg-cover absolute top-10 right-10  rounded-full " src={`${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/cilukba/${timelines[contentIndex]?.image_2}`} alt="" />
-            <img className="h-12 w-12 bg-cover absolute top-40 left-28  rounded-full " src={`${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/cilukba/${timelines[contentIndex]?.image_3}`} alt="" />
+            <img className="h-12 w-12 object-cover absolute top-16 left-8  rounded-full " src={`${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/cilukba/${timelines[contentIndex]?.image_1}`} alt="" />
+            <img className="h-12 w-12 object-cover absolute top-10 right-10  rounded-full " src={`${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/cilukba/${timelines[contentIndex]?.image_2}`} alt="" />
+            <img className="h-12 w-12 object-cover absolute top-40 left-28  rounded-full " src={`${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/cilukba/${timelines[contentIndex]?.image_3}`} alt="" />
           </div>
         </div>
       </div>

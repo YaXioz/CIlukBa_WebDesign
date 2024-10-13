@@ -46,7 +46,7 @@ export default function Page() {
             {/* Profile Image */}
             <div className="relative w-[90px] h-[90px] mx-auto mb-6">
               <img
-                src={selectedImage || "/image/profile-picture.png"} // Menampilkan gambar yang diunggah atau default
+                src={profile?.picture ? `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/cilukba/${profile?.picture}` : selectedImage || "/image/profile-picture.png"} // Menampilkan gambar yang diunggah atau default
                 alt="Profile Picture"
                 className="rounded-full shadow-lg border-4 border-[#5E27D1] object-cover w-[90px] h-[90px]" // Ukuran tetap untuk gambar
               />

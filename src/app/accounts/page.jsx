@@ -17,7 +17,7 @@ export default async function Page() {
       <div className="my-16 container relative  mx-auto">
         {/* Sidebar */}
         <aside className="max-w-max">
-          <Navside />
+          <Navside profile={profile} />
         </aside>
 
         {/* Main Content */}

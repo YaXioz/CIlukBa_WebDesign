@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 import SearchBox from "./searchBox";
 import { useRouter } from "next/navigation";
 
-export default function Navside() {
+export default function Navside({ profile }) {
   const [username, setusername] = useState("");
   const [searchActive, setSearchActive] = useState(false);
 
@@ -59,9 +59,12 @@ export default function Navside() {
             className={`cursor-pointer px-2 block relative transition-transform transform hover:scale-110
             ${router.pathname === "/accounts" ? "text-[#8C57F1] scale-110" : "text-white hover:text-[#8C57F1]"}`} // Kondisi untuk highlight
           >
-            <Image src="/image/profile-picture.png" alt="alt placeholder" width={40} height={40} className="rounded-full bg-[#666666]" />
+            <img
+              src={profile?.picture ? `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/cilukba/${profile?.picture}` : "/image/profile-picture.png"}
+              alt="alt placeholder"
+              className="rounded-full bg-[#666666] w-[40px] h-[40px] object-cover"
+            />
             {/* Notification Badge */}
-            <span className="absolute right-0 top-0 -mt-2 text-xs bg-red-500 text-white font-medium px-2 shadow-lg rounded-full border-2 border-[#252A34]">3</span>
           </span>
         </Link>
 
