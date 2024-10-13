@@ -29,7 +29,7 @@ export default async function Page({ params }) {
           {isEmpty(posts) ? (
             <div className="text-center w-[70vh] border-t border-[#d9d9d9] p-10 text-[#f5f5f5]">No post has been created</div>
           ) : (
-            <div className="grid grid-cols-3 gap-3 border-t border-[#d9d9d9] p-5">
+            <div className="grid xl:grid-cols-3 grid-cols-1 gap-3 border-t border-[#d9d9d9] p-5">
               {posts?.map((post, i) => (
                 <Link href={`/accounts/post/edit/${params?.year}/${post?.url}`} key={i} className="transition-transform transform hover:scale-105">
                   <img

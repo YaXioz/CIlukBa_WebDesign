@@ -50,11 +50,6 @@ export default async function Page() {
                       <RiEyeLine size={40} />
                     </span>
                   </Link>
-                  <Link href={"accounts/profile"}>
-                    <span className="cursor-pointer text-gray-500 hover:text-white transition-all duration-200">
-                      <RiDeleteBin7Line size={40} />
-                    </span>
-                  </Link>
                 </div>
               </div>
             ))}
