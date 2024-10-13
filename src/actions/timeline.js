@@ -18,7 +18,7 @@ export async function getTimelines(username = null) {
 
   const { data, error } = await supabase.select().eq("user_id", user_id);
 
-  data.sort((a, b) => parseInt(a.year) - parseInt(b.year));
+  data?.sort((a, b) => parseInt(a.year) - parseInt(b.year));
 
   console.log(data);
 
@@ -40,7 +40,7 @@ export async function getTimeline(username = null, year) {
   const { data, error } = await supabase.select().eq("user_id", user_id);
   console.log(error);
 
-  const timeline = data.filter((timeline, i) => {
+  const timeline = data?.filter((timeline, i) => {
     if (timeline["year"] == year) return timeline;
   });
   return timeline[0];

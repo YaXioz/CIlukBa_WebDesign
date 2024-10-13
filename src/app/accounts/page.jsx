@@ -21,37 +21,24 @@ export default async function Page() {
         </aside>
 
         {/* Main Content */}
-        <div className="container bg-[#10071d] rounded-lg flex flex-col items-center py-10 px-6 shadow-xl space-y-8 relative overflow-hidden">
+        <div className="container bg-[#10071d]/80 rounded-xl flex flex-col items-center py-10 px-6 shadow-xl space-y-8 relative overflow-hidden">
           {/* Box shadow effect */}
-          <div className="absolute inset-0 bg-[#10071d] opacity-60 shadow-[0px_0px_50px_rgb(140,69,255),0px_0px_80px_rgb(255,255,255,.1),0_0_50px_rgb(140,69,255)] rounded-lg"></div>
+          <div className="absolute inset-0 bg-[#10071d] opacity-60 shadow-[0px_0px_50px_rgb(140,69,255),0px_0px_80px_rgb(255,255,255,.1),0_0_50px_rgb(140,69,255)] rounded-xl"></div>
 
           {/* Profile Section */}
           <div className="relative z-10">
-            <Image
-              src={profile?.profilePicture ?? "/image/profile-picture.png"}
-              alt="Profile"
-              width={120}
-              height={120}
-              className="rounded-full mb-6 bg-[#666666] border-4 border-[#fdfdfd] shadow-lg object-cover"
-            />
+            <Image src={profile?.profilePicture ?? "/image/profile-picture.png"} alt="Profile" width={120} height={120} className="rounded-full mb-6 bg-[#666666] border-4 border-[#fdfdfd] shadow-lg object-cover" />
           </div>
 
           <div className="relative z-10 text-center space-y-2">
-            <div className="font-bold text-3xl text-[#f5f5f5]">
-              {profile?.name ?? "User Name"}
-            </div>
-            <div className="font-light text-md text-[#d5d5d5] w-2/3 mx-auto">
-              {profile?.bio ?? "No bio available"}
-            </div>
+            <div className="font-bold text-3xl text-[#f5f5f5]">{profile?.name ?? "User Name"}</div>
+            <div className="font-light text-md text-[#d5d5d5] mx-auto">{profile?.bio ?? "No bio available"}</div>
           </div>
 
           {/* Timeline Cards */}
-          <div className="w-2/3 h-[50vh] flex flex-col gap-10 border-t border-[#8c45ff] pt-4 overflow-auto justify-start relative z-10">
+          <div className="w-2/3 h-[50vh] flex flex-col gap-10 border-t border-[#8c45ff] pt-4 px-5 overflow-auto justify-start relative z-10">
             {timelines.map((timeline, i) => (
-              <div
-                className="bg-[#252A34] text-white py-4 px-6 rounded-lg flex flex-row justify-between items-center shadow-[0px_0px_15px_#8c45ff] transition-all hover:shadow-[0px_0px_25px_#8c45ff]"
-                key={i}
-              >
+              <div className="bg-[#252A34] text-white py-4 px-6 rounded-lg flex flex-row justify-between items-center shadow-[0px_0px_15px_#8c45ff] transition-all hover:shadow-[0px_0px_25px_#8c45ff]" key={i}>
                 <div className="text-3xl font-bold">{timeline["year"]} | 12 Posts</div>
                 <div className="flex gap-5">
                   <Link href={`accounts/timeline/${timeline.year}`}>

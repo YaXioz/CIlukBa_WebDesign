@@ -82,3 +82,14 @@ export async function create(state, formData) {
   }
   redirect(`/accounts/timeline/${validatedFields.data.year}`);
 }
+
+export async function update(state, formData) {
+  const supabase = createSupabaseClient().from("Posts");
+
+  const validatedFields = PostCreateFormSchema.safeParse({
+    year: parseInt(formData.get("year")),
+    image: formData.get("image"),
+    description: formData.get("description"),
+    event_date: formData.get("event_date"),
+  });
+}
