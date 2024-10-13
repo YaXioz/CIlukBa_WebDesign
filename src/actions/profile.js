@@ -6,6 +6,7 @@ import { redirect } from "next/navigation";
 import { EditProfileFormSchema } from "@/lib/definitions";
 import { isEmpty } from "@/lib/utils";
 import { uploadImage } from "@/supabase/storage/client";
+import argon from "argon2";
 
 export async function getId(username = null) {
   if (!username) {
