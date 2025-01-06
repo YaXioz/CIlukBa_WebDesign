@@ -84,18 +84,18 @@ export default function Page() {
       </motion.div>
 
       {/* Web Logo */}
-      <div className="flex justify-center pt-12 mb-12 z-10">
-        <img src="/image/logo-white.png" alt="Logo" className="h-14" />
+      <div className="flex justify-center pt-28 md:pt-12 md:mb-12 lg:pt-12 lg:mb-12 z-10">
+        <img src="/image/logo-white.png" alt="Logo" className="h-12 md:h-16 lg:h-20" />
       </div>
 
       {/* Title */}
-      <div className="tittle text-center lg:pt-40 md:pt-48 sm:pt-52 text-white lg:text-7xl md:text-6xl sm:text-5xl text-md font-bold tracking-tighter font-montserrat bg-white bg-[radial-gradient(100%_100%_at_bottom_left,white,white,rgb(74,32,138,.5))] text-transparent bg-clip-text z-10 relative">
+      <div className="tittle text-center lg:pt-32 md:pt-36 pt-48 text-white lg:text-7xl md:text-6xl sm:text-5xl text-md font-bold tracking-tighter font-montserrat bg-white bg-[radial-gradient(100%_100%_at_bottom_left,white,white,rgb(74,32,138,.5))] text-transparent bg-clip-text z-10 relative">
         Looking Back, <br />
         Celebrating the Past
       </div>
 
       {/* SubTitle */}
-      <div className="subTittle text-center lg:pt-5 md:pt-4 sm:pt-3 text-white/60 lg:text-2xl sm:text-base text-xs md:text-xl font-thin font-montserrat z-10 relative">Your personal page to show the precious moments in your life</div>
+      <div className="subTittle text-center lg:pt-5 md:pt-4 pt-2 text-white/60 lg:text-2xl text-base md:text-xl font-thin font-montserrat z-10 relative">Your personal page to show the precious moments in your life</div>
 
       {/* Start Button */}
       <motion.div
@@ -114,7 +114,7 @@ export default function Page() {
         onTap={onTap}
         onTapStart={onTapStart}
         onTapCancel={onTapCancel}
-        className="startButton lg:mt-24 md:mt-20 sm:mt-24 sm:top-0 top-[5%]  left-1/2 translate-x-[-50%] lg:w-[210px] lg:h-[50px] md:w-[190px] md:h-[45px] sm:w-[170px] sm:h-[43px] w-[120px] h-[30px] relative cursor-pointer py-2 px-3 rounded-full bg-gradient-to-b from-[#2b1551] to-[#6b3db1] shadow-[0px_0px_12px_#8c45ff] overflow-hidden z-10"
+        className="startButton lg:mt-26 md:mt-14 top-[5%]  left-1/2 translate-x-[-50%] lg:w-[210px] lg:h-[50px] md:w-[190px] md:h-[45px] sm:w-[170px] sm:h-[43px] w-[120px] h-[30px] relative cursor-pointer py-2 px-3 rounded-full bg-gradient-to-b from-[#2b1551] to-[#6b3db1] shadow-[0px_0px_12px_#8c45ff] overflow-hidden z-10"
       >
         <div className="absolute inset-0">
           <div className="border border-white/20 absolute inset-0 [mask-image:linear-gradient(to_bottom,black,transparent)]"></div>

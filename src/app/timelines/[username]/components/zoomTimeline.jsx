@@ -149,7 +149,7 @@ export default function ZoomTimeline({ timelines, username }) {
   );
 
   return (
-    <div ref={main} className="bg-gradient-to-br from-purple-700 to-purple-800">
+    <div ref={main} className="bg-gradient-to-b from-purple-800 to-purple-700">
       <div id="image" className="max-h-[100vh] max-w-[100vw] py-[50vh]">
         <Navside />
         <motion.div
@@ -165,7 +165,7 @@ export default function ZoomTimeline({ timelines, username }) {
             duration: 30,
             ease: "linear",
           }}
-          className="absolute lg:w-[900px] lg:h-[900px] md:w-[700px] md:h-[700px] sm:w-[550px] sm:h-[550px]  border border-white opacity-20 rounded-full top-1/2 left-1/2 "
+          className="absolute lg:w-[900px] lg:h-[900px] md:w-[700px] md:h-[700px] w-[550px] h-[550px]  border border-white opacity-20 rounded-full top-1/2 left-1/2 "
         >
           <div className="absolute h-2 w-2 bg-white rounded-full top-1/2 left-0 -translate-x-1/2 -translate-y-1/2"></div>
           <div className="absolute h-2 w-2 bg-white rounded-full top-0 left-1/2 -translate-x-1/2 -translate-y-1/2"></div>
@@ -186,7 +186,7 @@ export default function ZoomTimeline({ timelines, username }) {
             duration: 120,
             ease: "linear",
           }}
-          className="absolute lg:h-[1210px] lg:w-[1210px] md:h-[950px] md:w-[950px] sm:h-[750px] sm:w-[750px] rounded-full border border-white/70 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 border-dashed"
+          className="absolute lg:h-[1210px] lg:w-[1210px] md:h-[950px] md:w-[950px] h-[750px] w-[750px] rounded-full border border-white/70 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 border-dashed"
         ></motion.div>
         <motion.div
           style={{
@@ -201,7 +201,7 @@ export default function ZoomTimeline({ timelines, username }) {
             duration: 60,
             ease: "linear",
           }}
-          className="absolute lg:h-[1675px] lg:w-[1675px] md:h-[1200px] md:w-[1200px] sm:h-[950px] sm:w-[950px] rounded-full border border-white opacity-20 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+          className="absolute lg:h-[1675px] lg:w-[1675px] md:h-[1200px] md:w-[1200px] h-[950px] w-[950px] rounded-full border border-white opacity-20 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
         >
           <div className="absolute h-2 w-2 bg-white rounded-full top-1/2 left-0 -translate-x-1/2 -translate-y-1/2"></div>
           <div className="absolute h-2 w-2 bg-white rounded-full top-1/2 left-full -translate-x-1/2 -translate-y-1/2"></div>
